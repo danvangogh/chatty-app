@@ -11,14 +11,14 @@ class App extends Component {
       currentUser: {name: "Bob"},
       messages: [
          {
+          id: 1,
           username: "Bob",
-          content: "Has anyone seen my marbles?",
-          id: 1
+          content: "Has anyone seen my marbles?"
         },
         {
+          id: 2,
           username: "Anonymous",
-          content: "No, I think you lost them. You lost your marbles Bob. You lost them for good.",
-          id: 2
+          content: "No, I think you lost them. You lost your marbles Bob. You lost them for good."
         }
       ]
     }
