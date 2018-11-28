@@ -5,12 +5,17 @@ class Chatbar extends Component {
 		super(props)
 	}
 	render() {
+		const onSubmit = event => {
+			if (event.key === 'Enter') {
+				event.preventDefault();
+				this.props.addNewMessage(event.target.value);
+				event.target.value = '';
+			}
+		}
 		return (
 			<footer className="chatbar">
-				<form>
-					<input className="chatbar-username" placeholder="{Your Name (Optional)}" defaultValue = {this.props.currentUser.name} />
-					<input className="chatbar-message" placeholder="Type a message and hit ENTER" />
-				</form>
+					<input className="chatbar-username" placeholder="{Your Name (Optional)}" defaultValue = {this.props.currentUser.name} name="newUsernameInput"/>
+					<input className="chatbar-message" placeholder="Type a message and hit ENTER" name="newMessageInput" defaultValue = '' onKeyDown={onSubmit}/>
 			</footer>
 		)
 	}
