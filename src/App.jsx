@@ -8,7 +8,7 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      currentUser: {name: "Bob"},
+      currentUser: '',
       messages: []
     }
     this.addChatMsg = this.addChatMsg.bind(this);
@@ -21,18 +21,11 @@ class App extends Component {
       console.log("Connected to Server")
     };
 
-    // const that = this;
     this.socket.onmessage = function(event) {
       let msg = JSON.parse(event.data);
       let { id, username, content } = msg;
       let newMsg = { id, username, content };
-      //
-      // function newState() {
-      //   console.log("got to newState")
-      //   oldMessages.setState({
-      //   messages: [...oldMessages, newMsg]
-      //   });
-      // }
+
       this.setState({ messages: this.state.messages.concat(newMsg)});
     }.bind(this);
 
@@ -56,7 +49,7 @@ class App extends Component {
       <Navbar />
       {/* <Message  /> */}
       <MessageList messages = {this.state.messages}/>
-      <Chatbar currentUser = {this.state.currentUser} addChatMsg = {this.addChatMsg}/>
+      <Chatbar currentUser = {this.state.currentUser}  addChatMsg = {this.addChatMsg}/>
       </div>
     );
   }
