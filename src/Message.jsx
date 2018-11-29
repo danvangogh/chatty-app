@@ -7,7 +7,7 @@ class Message extends Component {
 	render() {
 		const messages = this.props.messages;
 		const allMessages = messages.map((message) =>
-			<div className="message" key={message.id}>
+			<div className="message-content" key={message.id}>
 				<span className="message-username">{message.username}</span>
 				<span className="message-content">{message.content}</span>
 			</div>
