@@ -4,8 +4,6 @@ import Message from "./Message.jsx"
 import Chatbar from "./Chatbar.jsx"
 import MessageList from "./MessageList.jsx"
 
-const socket = new WebSocket('ws://localhost:3001');
-
 class App extends Component {
   constructor(props){
     super(props)
@@ -17,18 +15,26 @@ class App extends Component {
   }
   componentDidMount(event) {
 
-    this.socket = {
-      socket
-    };
+    this.socket = new WebSocket('ws://localhost:3001')
 
-    socket.onopen = function(event) {
+    this.socket.onopen = function(event) {
       console.log("Connected to Server")
     };
 
-    socket.onmessage = function(event) {
-      const msg = JSON.parse(event.data);
-      console.log('msg from server!!!!!', msg);
-    }
+    // const that = this;
+    this.socket.onmessage = function(event) {
+      let msg = JSON.parse(event.data);
+      let { id, username, content } = msg;
+      let newMsg = { id, username, content };
+      //
+      // function newState() {
+      //   console.log("got to newState")
+      //   oldMessages.setState({
+      //   messages: [...oldMessages, newMsg]
+      //   });
+      // }
+      this.setState({ messages: this.state.messages.concat(newMsg)});
+    }.bind(this);
 
     console.log("componentDidMount <App />");
     setTimeout(() => {
@@ -39,13 +45,11 @@ class App extends Component {
     }, 3000);
   }
   addChatMsg(content) {
-    // let message = {
-    //   id: this.state.messages.length + 1,
-    //   username: this.state.currentUser.name,
-    //   content: content
-    // };
-    socket.send(JSON.stringify(content))
+    this.socket.send(JSON.stringify(content))
   }
+
+
+
   render() {
     return (
       <div>
