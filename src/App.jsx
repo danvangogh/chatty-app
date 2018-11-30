@@ -8,7 +8,7 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      currentUser: {name: "Sans-Nom"},
+      currentUser: {name: "Guy"},
       messages: [],
       usercount: 1
     }
@@ -17,20 +17,12 @@ class App extends Component {
     this.newName = this.newName.bind(this)
   }
   componentDidMount(event) {
-
     this.socket = new WebSocket('ws://localhost:3001')
-
-    this.socket.onopen = function(event) {
-      console.log("Connected to Server", event.data);
-    };
-
     this.socket.onmessage = function(event) {
-
       let msg = JSON.parse(event.data);
 
       switch(msg.type) {
         case ('clientCount'):
-        console.log("youu")
           this.setState({
             usercount: msg.count
           })
@@ -39,28 +31,14 @@ class App extends Component {
         case ('incomingNotification'):
           let { type, id, username, content } = msg;
           let newMsg = { type, id, username, content };
-
           this.setState({ messages: this.state.messages.concat(newMsg)});
       }
-      console.log(this.state.usercount)
     }.bind(this);
-
-
-
-    // setTimeout(() => {
-    //   console.log("Simulating incoming message");
-    //   const newMessage = {type: "postMessage", username: "Michelle", content: "Hello there!"};
-    //   const messages = this.state.messages.concat(newMessage)
-    //   this.setState({messages: messages})
-    // }, 3000);
   }
   addChatMsg(content) {
-    console.log("content at addChatMsg: ", content)
     this.socket.send(JSON.stringify(content))
   }
   addNotification(content) {
-    console.log("event.data = ", event.data)
-    console.log("content at addNotification: ", content)
     this.socket.send(JSON.stringify(content))
   }
   newName(event) {
@@ -82,7 +60,6 @@ class App extends Component {
     return (
       <div>
       <Navbar usercount = {this.state.usercount}/>
-      {/* <Message  /> */}
       <MessageList messages = {this.state.messages} currentUser = {this.state.currentUser}/>
       <Chatbar currentUser = {this.state.currentUser}  addChatMsg = {this.addChatMsg} addNotification = {this.addNotification} newName = {this.newName}/>
       </div>

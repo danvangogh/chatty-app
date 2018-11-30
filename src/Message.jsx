@@ -8,7 +8,6 @@ class Message extends Component {
 	render() {
 		const messages = this.props.messages;
 		const currentUser = this.props.currentUser.name
-
 		const allMessages = messages.map(message => {
 			return message.type === "incomingMessage" ?
 			<div className="message-content" key={message.id}>
@@ -17,16 +16,9 @@ class Message extends Component {
 			</div>
 			:
 			<div className="notification" key={message.id}>
-  			<span className="notification-content">{message.username} changed their name to {this.props.currentUser}.</span>
+  			<span className="notification-content">{message.username} est maintenant {this.props.currentUser}.</span>
 			</div>
 		})
-
-		// const allMessages = messages.map((message) =>
-		// 	<div className="message-content" key={message.id}>
-		// 		<span className="message-username">{message.username}</span>
-		// 		<span className="message-content">{message.content}</span>
-		// 	</div>
-		// );
 
 		return (
 			<div>
@@ -37,6 +29,5 @@ class Message extends Component {
 		);
 	}
 }
-
 
 export default Message;
