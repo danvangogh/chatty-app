@@ -10,7 +10,7 @@ class App extends Component {
     this.state = {
       currentUser: {name: "Sans-Nom"},
       messages: [],
-      usercount: 0
+      usercount: 1
     }
     this.addChatMsg = this.addChatMsg.bind(this);
     this.addNotification = this.addNotification.bind(this)
@@ -21,17 +21,18 @@ class App extends Component {
     this.socket = new WebSocket('ws://localhost:3001')
 
     this.socket.onopen = function(event) {
-      console.log("Connected to Server",event.data);
+      console.log("Connected to Server", event.data);
     };
 
     this.socket.onmessage = function(event) {
-      console.log("event.data at socket.onmessage= :", event.data)
+
       let msg = JSON.parse(event.data);
 
       switch(msg.type) {
         case ('clientCount'):
-          this.setState = ({
-            usercount: userCount.count
+        console.log("youu")
+          this.setState({
+            usercount: msg.count
           })
           break;
         case ('incomingMessage'):
@@ -80,7 +81,7 @@ class App extends Component {
   render() {
     return (
       <div>
-      <Navbar />
+      <Navbar usercount = {this.state.usercount}/>
       {/* <Message  /> */}
       <MessageList messages = {this.state.messages} currentUser = {this.state.currentUser}/>
       <Chatbar currentUser = {this.state.currentUser}  addChatMsg = {this.addChatMsg} addNotification = {this.addNotification} newName = {this.newName}/>
