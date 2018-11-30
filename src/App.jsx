@@ -32,7 +32,6 @@ class App extends Component {
       this.setState({ messages: this.state.messages.concat(newMsg)});
     }.bind(this);
 
-    console.log("componentDidMount <App />");
     // setTimeout(() => {
     //   console.log("Simulating incoming message");
     //   const newMessage = {type: "postMessage", username: "Michelle", content: "Hello there!"};
@@ -55,7 +54,7 @@ class App extends Component {
 			let message = {
 				type: "postNotification",
 				username: this.state.currentUser.name,
-				content: `${this.state.currentUser.name} est maintenant ${changedName}`
+				content: ''
 			}
 			this.addNotification(message);
       this.setState({
@@ -68,8 +67,7 @@ class App extends Component {
     return (
       <div>
       <Navbar />
-      {/* <Message  /> */}
-      <MessageList messages = {this.state.messages}/>
+      <MessageList messages = {this.state.messages} currentUser = {this.state.currentUser}/>
       <Chatbar currentUser = {this.state.currentUser}  addChatMsg = {this.addChatMsg} addNotification = {this.addNotification} newName = {this.newName}/>
       </div>
     );
