@@ -1,8 +1,18 @@
-React Boilerplate
-=====================
+# Chatty App
+### A lightweight chat app utilizing React and WebSockets
 
-A minimal and light dev environment for ReactJS.
+Chatty App is a minimal Slack-like application designed to allow multiple users converse in real time, and to see how many people are logged on simultaneously.
 
+!["The interface of a Chatty App chat"]()
+
+## Tech Stack
+
+* NodeJS
+* React
+* Express Server
+* WebSockets
+* JavaScript
+* HTML/CSS
 
 ### Dependencies
 
