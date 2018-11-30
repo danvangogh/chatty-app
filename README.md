@@ -8,7 +8,7 @@ Chatty App is a minimal Slack-like application designed to allow multiple users 
 ## Tech Stack
 
 * NodeJS
-* React
+* ReactJS
 * Express Server
 * WebSockets
 * JavaScript
