@@ -9,7 +9,8 @@ class App extends Component {
     super(props)
     this.state = {
       currentUser: {name: "Sans-Nom"},
-      messages: []
+      messages: [],
+      usercount: 0
     }
     this.addChatMsg = this.addChatMsg.bind(this);
     this.addNotification = this.addNotification.bind(this)
@@ -20,17 +21,30 @@ class App extends Component {
     this.socket = new WebSocket('ws://localhost:3001')
 
     this.socket.onopen = function(event) {
-      console.log("Connected to Server")
+      console.log("Connected to Server",event.data);
     };
 
     this.socket.onmessage = function(event) {
       console.log("event.data at socket.onmessage= :", event.data)
       let msg = JSON.parse(event.data);
-      let { type, id, username, content } = msg;
-      let newMsg = { type, id, username, content };
 
-      this.setState({ messages: this.state.messages.concat(newMsg)});
+      switch(msg.type) {
+        case ('clientCount'):
+          this.setState = ({
+            usercount: userCount.count
+          })
+          break;
+        case ('incomingMessage'):
+        case ('incomingNotification'):
+          let { type, id, username, content } = msg;
+          let newMsg = { type, id, username, content };
+
+          this.setState({ messages: this.state.messages.concat(newMsg)});
+      }
+      console.log(this.state.usercount)
     }.bind(this);
+
+
 
     // setTimeout(() => {
     //   console.log("Simulating incoming message");
