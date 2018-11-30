@@ -3,7 +3,7 @@
 
 Chatty App is a minimal Slack-like application designed to allow multiple users converse in real time, and to see how many people are logged on simultaneously.
 
-!["The interface of a Chatty App chat"]()
+!["The interface of a Chatty App chat"](https://github.com/danvangogh/chatty-app/blob/master/docs/Chatty%20App%20Interface.png?raw=true)
 
 ## Tech Stack
 
