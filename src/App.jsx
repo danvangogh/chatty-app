@@ -67,6 +67,7 @@ class App extends Component {
     return (
       <div>
       <Navbar />
+      {/* <Message  /> */}
       <MessageList messages = {this.state.messages} currentUser = {this.state.currentUser}/>
       <Chatbar currentUser = {this.state.currentUser}  addChatMsg = {this.addChatMsg} addNotification = {this.addNotification} newName = {this.newName}/>
       </div>
